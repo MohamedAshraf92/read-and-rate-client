@@ -1,38 +1,76 @@
 .App {
   text-align: center;
+  /* font-family: "Libre Baskerville"; */
+  /* font-family: "Alegreya Sans", sans-serif; */
+  font-family: "Almarai", sans-serif;
+  font-weight: 400;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*---------- BUTTONS STYLING ----------*/
+
+.btnMain {
+  background-color: dodgerblue !important;
+  color: white !important;
+  font-size: 0.95rem !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btnRed {
+  background-color: #ff4d4f !important;
+  color: white !important;
+  font-size: 0.95rem !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.btnWarn {
+  background-color: #faad14 !important;
+  color: white !important;
+  font-size: 0.95rem !important;
+}
+
+.btnFlex {
+  display: flex !important;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btnMain:hover {
+  background-color: white !important;
+  color: dodgerblue !important;
+  font-size: 1rem;
+  transform: 0.3s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btnRed:hover {
+  background-color: white !important;
+  color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+  font-size: 1rem;
+  transform: 0.3s;
+}
+
+.btnWarn:hover {
+  background-color: white !important;
+  color: #faad14 !important;
+  border-color: #faad14 !important;
+  font-size: 1rem;
+  transform: 0.3s;
+}
+
+.btnMainOut {
+  background-color: white !important;
+  color: dodgerblue !important;
+}
+
+/*---------- HEAD LINES STYLING ----------*/
+
+.component-title {
+  text-align: start;
+  margin-bottom: 25px;
+}
+
+/*---------- TABLE HEAD STYLING ----------*/
+
+.ant-table-thead > tr > th {
+  background-color: dodgerblue !important;
+  color: white !important;
+  font-weight: bold !important;
 }

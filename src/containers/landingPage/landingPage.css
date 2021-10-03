@@ -1,0 +1,25 @@
+.main-container {
+  max-width: 1200px;
+  padding: 2rem;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 0.5px solid #d9d9d9;
+}
+
+.greeting {
+  font-family: "Libre Baskerville";
+  font-weight: 400;
+  color: #2a4a4a;
+}
+
+.popular-signup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.popular-items {
+  width: 48%;
+}

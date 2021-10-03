@@ -1,0 +1,18 @@
+.admin-comp-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-comp-head span {
+  text-align: left;
+}
+
+.add-icon {
+  font-size: 20px;
+}
+
+/* .admin-table {
+  max-height: 950px;
+} */

@@ -1,0 +1,19 @@
+.login-footer {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.login-footer ul {
+  list-style: none;
+}
+
+.login-footer a {
+  margin: auto 20px;
+  font-weight: normal;
+  color: gray;
+}
+
+.login-footer-active {
+  font-weight: bold !important;
+  color: #096dd9 !important;
+}

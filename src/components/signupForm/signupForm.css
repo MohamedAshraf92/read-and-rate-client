@@ -1,0 +1,24 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48%;
+}
+
+.signup-input {
+  margin-bottom: 20px !important;
+}
+
+.signup-upload {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.signup-btn {
+  width: 70%;
+  margin: 30px auto;
+  background-color: dodgerblue;
+}

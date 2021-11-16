@@ -15,13 +15,13 @@
 }
 
 .btnRed {
-  background-color: #ff4d4f !important;
+  background-color: #ff0f0f !important;
   color: white !important;
   font-size: 0.95rem !important;
 }
 
 .btnWarn {
-  background-color: #faad14 !important;
+  background-color: #eed202 !important;
   color: white !important;
   font-size: 0.95rem !important;
 }
@@ -41,16 +41,16 @@
 
 .btnRed:hover {
   background-color: white !important;
-  color: #ff4d4f !important;
-  border-color: #ff4d4f !important;
+  color: #ff0f0f !important;
+  border-color: #ff0f0f !important;
   font-size: 1rem;
   transform: 0.3s;
 }
 
 .btnWarn:hover {
   background-color: white !important;
-  color: #faad14 !important;
-  border-color: #faad14 !important;
+  color: #eed202 !important;
+  border-color: #eed202 !important;
   font-size: 1rem;
   transform: 0.3s;
 }

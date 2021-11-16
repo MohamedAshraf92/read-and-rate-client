@@ -6,44 +6,62 @@ import Modal from "antd/lib/modal";
 import { MdAddCircle } from "react-icons/md";
 import message from "antd/lib/message";
 import Input from "antd/lib/input";
+import Space from "antd/lib/space";
 import Popconfirm from "antd/lib/popconfirm";
 import API from "../../API";
-import { getCategories } from "../../store/actions/categoriesActions";
+import { getAuthors } from "../../store/actions/authorsAction";
+import Avatar from "antd/lib/avatar";
+import ImgCrop from "antd-img-crop";
+import Upload from "antd/lib/upload";
 
-import "./adminCategories.css";
+import "./adminAuthors.css";
 
-const AdminCategories = () => {
-  const categories = useSelector((state) => state.categories.categories);
+const AdminAuthors = () => {
+  const authors = useSelector((state) => state.authors.authors);
   const token = useSelector((state) => state.auth.token);
 
-  const [selectedCategory, setSelectedCategorey] = useState([]);
-  const [name, setName] = useState("");
+  const [selectedAuthor, setSelectedAuthor] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [fileList, setFileList] = useState([]);
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getAuthors());
     // eslint-disable-next-line
   }, []);
 
-  const addCategory = () => {
+  const addAuthor = () => {
+    let formData = new FormData();
+    if (firstName === "") message.warn("First Name is required");
+    if (lastName === "") message.warn("Last Name is required");
+    if (birthday === "") message.warn("Birthday is required");
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("birthday", birthday);
+    formData.append("photo", Array.from(fileList)[0]);
+
     API({
       method: "post",
-      url: "/category",
+      url: "/author",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: { name },
+      data: formData,
     })
       .then((res) => {
-        dispatch(getCategories(res.data));
+        dispatch(getAuthors());
         setShow(false);
-        message.success("Category added seccessfully!");
-        setName("");
+        message.success("Author added seccessfully!");
+        setFirstName("");
+        setLastName("");
+        setBirthday("");
+        setFileList([]);
       })
       .catch((err) => {
-        console.log(err.response);
         message.error(err.response.data.message);
       });
   };
@@ -55,13 +73,13 @@ const AdminCategories = () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: { categoryId: selectedCategory._id, newName: name },
+      // data: { categoryId: selectedAuthor._id, newName: name },
     })
       .then((res) => {
-        dispatch(getCategories(res.data));
+        dispatch(getAuthors());
         setShowEdit(false);
         message.success("Category edited seccessfully!");
-        setName("");
+        // setName("");
       })
       .catch((err) => {
         console.log(err.response);
@@ -76,18 +94,36 @@ const AdminCategories = () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: { id: selectedCategory._id },
+      // data: { id: selectedCategory._id },
     })
       .then((res) => {
-        dispatch(getCategories(res.data));
+        dispatch(getAuthors());
         setShowEdit(false);
         message.success("Category deleted seccessfully!");
-        setName("");
+        // setName("");
       })
       .catch((err) => {
         console.log(err.response);
         message.error(err.response.data.message);
       });
+  };
+
+  const props = {
+    onRemove: (file) => {
+      this.setState(() => {
+        const index = fileList.indexOf(file);
+        const newFileList = fileList.slice();
+        newFileList.splice(index, 1);
+        return {
+          fileList: newFileList,
+        };
+      });
+    },
+    beforeUpload: (file) => {
+      setFileList([file]);
+      return false;
+    },
+    fileList,
   };
 
   const columns = [
@@ -97,9 +133,24 @@ const AdminCategories = () => {
       width: "25%",
     },
     {
-      title: "Name",
+      title: "Author",
       dataIndex: "name",
       width: "40%",
+      render: (text, record, index) => {
+        return (
+          <div className="avatar-badge">
+            <Avatar
+              className="admin-author-padge"
+              src={`http://localhost:8080/${record.photo}`}
+              shape="square"
+              alt="author image"
+            />
+            <span>
+              {record.firstName} {record.lastName}
+            </span>
+          </div>
+        );
+      },
     },
     {
       title: "Actions",
@@ -111,7 +162,7 @@ const AdminCategories = () => {
             <Button
               className="btnWarn"
               onClick={() => {
-                setSelectedCategorey(record);
+                setSelectedAuthor(record);
                 setShowEdit(true);
               }}
             >
@@ -130,7 +181,7 @@ const AdminCategories = () => {
               <Button
                 className="btnRed"
                 onClick={() => {
-                  setSelectedCategorey(record);
+                  setSelectedAuthor(record);
                 }}
               >
                 Delete
@@ -146,8 +197,8 @@ const AdminCategories = () => {
     <div>
       <div className="admin-comp-head">
         <span>
-          <h2>Categories</h2>
-          <h4>You can add, edit or delete any category</h4>
+          <h2>Authors</h2>
+          <h4>Control all authors information, and add new authors</h4>
         </span>
         <Button
           className="btnMain btnFlex"
@@ -155,13 +206,13 @@ const AdminCategories = () => {
           icon={<MdAddCircle className="add-icon" />}
           onClick={() => setShow(true)}
         >
-          &nbsp;Add Category
+          &nbsp;Add Author
         </Button>
       </div>
       <div className="admin-table">
         <Table
           columns={columns}
-          dataSource={categories}
+          dataSource={authors}
           pagination={{
             defaultPageSize: 10,
             showSizeChanger: false,
@@ -170,26 +221,45 @@ const AdminCategories = () => {
         />
       </div>
       <Modal
-        title="Add New Category"
+        title="Add New Author"
         visible={show}
         onCancel={() => setShow(false)}
         footer={[
           <Button
             className="btnMain"
             style={{ marginLeft: "0px" }}
-            onClick={addCategory}
+            onClick={addAuthor}
           >
             Add
           </Button>,
         ]}
       >
-        <p>New category name :</p>
-        <Input
-          type="text"
-          placeholder="Sports, History, etc.."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Input
+            addonBefore="First Name"
+            placeholder="Author first name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Input
+            addonBefore="Last Name"
+            placeholder="Author last name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Input
+            addonBefore="Birthday"
+            type="date"
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+          />
+
+          <ImgCrop>
+            <Upload {...props} className="upload-input">
+              <Button className="btnMainOut">Select Photo</Button>
+            </Upload>
+          </ImgCrop>
+        </Space>
       </Modal>
 
       <Modal
@@ -210,12 +280,12 @@ const AdminCategories = () => {
         <Input
           type="text"
           placeholder="Sports, History, etc.."
-          defaultValue={selectedCategory.name}
-          onChange={(e) => setName(e.target.value)}
+          defaultValue={selectedAuthor.name}
+          // onChange={(e) => setName(e.target.value)}
         />
       </Modal>
     </div>
   );
 };
 
-export default AdminCategories;
+export default AdminAuthors;

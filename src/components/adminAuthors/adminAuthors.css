@@ -1,0 +1,10 @@
+.avatar-badge,
+.upload-input {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.admin-author-padge {
+  margin-inline-end: 5px !important;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router";
+import { Redirect, Route, Routes } from "react-router";
 import { useSelector } from "react-redux";
 import LandingPage from "./containers/landingPage/landingPage";
 import AdminLogin from "./components/adminLogin/adminLogin";
@@ -13,13 +13,13 @@ function App() {
 
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/adminLogin" component={AdminLogin} />
-        <Route exact path="/adminPanel" component={AdminPanel} />
+      <Routes>
+        <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="adminLogin" element={<AdminLogin />} />
+        <Route exact path="adminPanel" element={<AdminPanel />} />
 
         {/*user ? "" : <Redirect to="/" />*/}
-      </Switch>
+      </Routes>
     </div>
   );
 }

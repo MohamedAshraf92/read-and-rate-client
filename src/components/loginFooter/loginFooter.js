@@ -8,22 +8,41 @@ const LoginFooter = () => {
     <div className="login-footer">
       <ul>
         <li>
-          <NavLink exact activeClassName="login-footer-active" to="/">
+          <NavLink
+            exact
+            className={(nav) => nav.isActive && "login-footer-active"}
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink activeClassName="login-footer-active" to="/aboutUs">
+          <NavLink
+            className={(nav) => nav.isActive && "login-footer-active"}
+            to="/aboutUs"
+          >
             About Us
           </NavLink>
-          <NavLink activeClassName="login-footer-active" to="/categories">
+          <NavLink
+            className={(nav) => nav.isActive && "login-footer-active"}
+            to="/categories"
+          >
             Categories
           </NavLink>
-          <NavLink activeClassName="login-footer-active" to="/authors">
+          <NavLink
+            className={(nav) => nav.isActive && "login-footer-active"}
+            to="/authors"
+          >
             Authors
           </NavLink>
-          <NavLink activeClassName="login-footer-active" to="/adminLogin">
+          <NavLink
+            className={(nav) => nav.isActive && "login-footer-active"}
+            to="/adminLogin"
+          >
             Admins Panel
           </NavLink>
-          <NavLink activeClassName="login-footer-active" to="/termsAndCond">
+          <NavLink
+            className={(nav) => nav.isActive && "login-footer-active"}
+            to="/termsAndCond"
+          >
             Terms & Conditions
           </NavLink>
         </li>

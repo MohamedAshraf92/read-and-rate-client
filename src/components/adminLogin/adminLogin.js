@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Input from "antd/lib/input";
 import Button from "antd/lib/button";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -15,7 +15,7 @@ const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const adminSignin = () => {
@@ -29,7 +29,7 @@ const AdminLogin = () => {
       .then((res) => {
         console.log(res);
         dispatch(loginUser(res.data));
-        history.push("/adminPanel");
+        navigate("/adminPanel");
       })
       .catch((err) => console.log(err));
   };

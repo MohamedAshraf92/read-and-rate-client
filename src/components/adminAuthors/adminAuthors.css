@@ -8,3 +8,11 @@
 .admin-author-padge {
   margin-inline-end: 5px !important;
 }
+
+.avatar-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}

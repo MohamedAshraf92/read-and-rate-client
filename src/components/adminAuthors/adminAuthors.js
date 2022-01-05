@@ -14,13 +14,15 @@ import Avatar from "antd/lib/avatar";
 import ImgCrop from "antd-img-crop";
 import Upload from "antd/lib/upload";
 
+import userIcon from "../../assets/user.png";
+
 import "./adminAuthors.css";
 
 const AdminAuthors = () => {
   const authors = useSelector((state) => state.authors.authors);
   const token = useSelector((state) => state.auth.token);
 
-  const [selectedAuthor, setSelectedAuthor] = useState([]);
+  const [selectedAuthor, setSelectedAuthor] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -62,45 +64,64 @@ const AdminAuthors = () => {
         setFileList([]);
       })
       .catch((err) => {
-        message.error(err.response.data.message);
+        message.error(err.response?.data?.message);
       });
   };
 
-  const editCategory = () => {
+  const editAuthor = () => {
+    let editedData = new FormData();
+    editedData.append(
+      "firstName",
+      firstName === "" ? selectedAuthor.firstName : firstName
+    );
+    editedData.append(
+      "lastName",
+      lastName === "" ? selectedAuthor.lastName : lastName
+    );
+    editedData.append(
+      "birthday",
+      birthday === "" ? selectedAuthor.birthday : birthday
+    );
+    editedData.append("photo", Array.from(fileList)[0]);
+    editedData.append("authorId", selectedAuthor._id);
+    console.log(editedData);
+
     API({
       method: "patch",
-      url: "/category",
+      url: "/author",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      // data: { categoryId: selectedAuthor._id, newName: name },
+      data: editedData,
     })
       .then((res) => {
         dispatch(getAuthors());
         setShowEdit(false);
-        message.success("Category edited seccessfully!");
-        // setName("");
+        message.success("Author edited seccessfully!");
+        setFirstName("");
+        setLastName("");
+        setBirthday("");
+        setFileList([]);
       })
       .catch((err) => {
         console.log(err.response);
-        message.error(err.response.data.message);
+        message.error(err.response?.data?.message);
       });
   };
 
-  const deleteCategory = () => {
+  const deleteAuthor = () => {
     API({
       method: "delete",
-      url: "/category",
+      url: "/author",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      // data: { id: selectedCategory._id },
+      data: { id: selectedAuthor._id },
     })
       .then((res) => {
         dispatch(getAuthors());
         setShowEdit(false);
-        message.success("Category deleted seccessfully!");
-        // setName("");
+        message.success("Author deleted seccessfully!");
       })
       .catch((err) => {
         console.log(err.response);
@@ -171,10 +192,8 @@ const AdminAuthors = () => {
             &nbsp;&nbsp;&nbsp;&nbsp;
             <Popconfirm
               title="Are you sure to delete this categorey ?"
-              onConfirm={deleteCategory}
-              onCancel={() =>
-                message.info("You cancelled deleting the categorey")
-              }
+              onConfirm={deleteAuthor}
+              onCancel={() => message.info("You cancelled deleting the author")}
               okText="Delete"
               cancelText="Cancel"
             >
@@ -263,26 +282,57 @@ const AdminAuthors = () => {
       </Modal>
 
       <Modal
-        title="Edit Category"
+        title="Edit Author"
         visible={showEdit}
         onCancel={() => setShowEdit(false)}
         footer={[
           <Button
             className="btnMain"
             style={{ marginLeft: "0px" }}
-            onClick={editCategory}
+            onClick={editAuthor}
           >
             Edit
           </Button>,
         ]}
       >
-        <p>Edited category name :</p>
-        <Input
-          type="text"
-          placeholder="Sports, History, etc.."
-          defaultValue={selectedAuthor.name}
-          // onChange={(e) => setName(e.target.value)}
-        />
+        <span className="avatar-block">
+          <Avatar
+            src={
+              selectedAuthor.photo === ""
+                ? userIcon
+                : `http://localhost:8080/${selectedAuthor.photo}`
+            }
+            size={100}
+          />
+          <ImgCrop>
+            <Upload {...props} className="upload-input">
+              <Button className="btnMainOut">Change Photo</Button>
+            </Upload>
+          </ImgCrop>
+        </span>
+        <Space
+          direction="vertical"
+          style={{ width: "100%", marginTop: "10px" }}
+        >
+          <Input
+            addonBefore="First Name"
+            placeholder="Author first name"
+            defaultValue={selectedAuthor.firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Input
+            addonBefore="Last Name"
+            placeholder="Author last name"
+            defaultValue={selectedAuthor.lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Input
+            addonBefore="Birthday"
+            type="date"
+            defaultValue={selectedAuthor.birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+          />
+        </Space>
       </Modal>
     </div>
   );

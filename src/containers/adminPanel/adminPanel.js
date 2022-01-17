@@ -3,6 +3,7 @@ import Tabs from "antd/lib/tabs";
 import MainNavbar from "../../components/mainNavbar/mainNavbar";
 import AdminCategories from "../../components/adminCategories/adminCategories";
 import AdminAuthors from "../../components/adminAuthors/adminAuthors";
+import AdminBooks from "../../components/adminBooks/adminBooks";
 
 import "./adminPanel.css";
 
@@ -23,7 +24,7 @@ const AdminPanel = () => {
               <AdminAuthors />
             </TabPane>
             <TabPane tab="Books" key="1">
-              Books Componant
+              <AdminBooks />
             </TabPane>
           </Tabs>
         </div>

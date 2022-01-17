@@ -1,16 +1,13 @@
 const initialState = {
-  token: "",
-  user: {},
+  books: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LOGIN":
-      // localStorage.setItem("token", action.token);
+    case "GET_BOOKS":
       return {
         ...state,
-        token: action.token,
-        user: action.user,
+        books: action.books,
       };
 
     default:

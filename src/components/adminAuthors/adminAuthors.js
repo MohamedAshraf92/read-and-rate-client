@@ -31,6 +31,7 @@ const AdminAuthors = () => {
   const [showEdit, setShowEdit] = useState(false);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAuthors());
     // eslint-disable-next-line

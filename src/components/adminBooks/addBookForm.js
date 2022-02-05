@@ -5,7 +5,6 @@ import Input from "antd/lib/input";
 import Select from "antd/lib/select";
 import Upload from "antd/lib/upload";
 import Button from "antd/lib/button";
-import ImgCrop from "antd-img-crop";
 import { addBook } from "../../store/actions/booksActions";
 
 const AddBookForm = ({ closeAddBookModal }) => {
@@ -63,8 +62,10 @@ const AddBookForm = ({ closeAddBookModal }) => {
 
   const onSubmit = (data) => {
     let formData = new FormData();
+    console.log(typeof data.description);
 
     formData.append("name", data.name);
+    formData.append("description", data.description);
     for (let i = 0; i < data.authors.length; i++) {
       formData.append("authors[]", data.authors[i]);
     }
@@ -78,6 +79,7 @@ const AddBookForm = ({ closeAddBookModal }) => {
       closeAddBookModal(false);
       reset({
         name: "",
+        description: "",
         authors: [],
         categories: [],
         photo: [],
@@ -98,6 +100,19 @@ const AddBookForm = ({ closeAddBookModal }) => {
           render={({ field }) => <Input {...field} />}
         />
         {errors.name && <p className="form-err">Book name is required</p>}
+      </div>
+      <div className="form-element-full">
+        <label>Book Description</label>
+        <Controller
+          control={control}
+          name="description"
+          type="text"
+          rules={{ required: true }}
+          render={({ field }) => <textarea {...field} className="ant-input" />}
+        />
+        {errors.description && (
+          <p className="form-err">Book name is required</p>
+        )}
       </div>
       <div className="form-element-full">
         <label>Authors</label>
@@ -145,21 +160,19 @@ const AddBookForm = ({ closeAddBookModal }) => {
           name="photo"
           rules={{ required: true }}
           render={({ field }) => (
-            <ImgCrop>
-              <Upload
-                defaultValue={[]}
-                {...field}
-                {...props}
-                className="upload-input"
-              >
-                <Button className="btnMainOut">Select Book Cover</Button>
-              </Upload>
-            </ImgCrop>
+            <Upload
+              defaultValue={[]}
+              {...field}
+              {...props}
+              className="upload-input"
+            >
+              <Button className="btnMainOut">Select Book Cover</Button>
+            </Upload>
           )}
         />
         {errors.photo && <p className="form-err">Book cover is required</p>}
       </div>
-      <button type="submit" className="btn btnMain">
+      <button type="submit" className="ant-btn btnMain ant-btn-round">
         ADD BOOK
       </button>
     </form>

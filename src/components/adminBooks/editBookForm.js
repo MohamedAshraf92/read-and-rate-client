@@ -4,7 +4,6 @@ import Input from "antd/lib/input";
 import Select from "antd/lib/select";
 import Upload from "antd/lib/upload";
 import Button from "antd/lib/button";
-import ImgCrop from "antd-img-crop";
 import Avatar from "antd/lib/avatar";
 import { editBook } from "../../store/actions/booksActions";
 
@@ -12,12 +11,14 @@ import bookIcon from "../../assets/book.png";
 
 const EditBookForm = ({ selectedBook, closeEditBookModal }) => {
   const [bookName, setBookName] = useState("");
+  const [description, setDesscription] = useState("");
   const [BookAuthors, setBookAuthors] = useState([]);
   const [bookCategories, setBookCategories] = useState([]);
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
     setBookName(selectedBook.name);
+    setDesscription(selectedBook.description);
     setBookAuthors(selectedBook.authors);
     setBookCategories(selectedBook.categories);
   }, [selectedBook]);
@@ -69,6 +70,7 @@ const EditBookForm = ({ selectedBook, closeEditBookModal }) => {
     let formData = new FormData();
 
     formData.append("name", bookName);
+    formData.append("description", description);
     for (let i = 0; i < BookAuthors.length; i++) {
       formData.append("authors[]", BookAuthors[i]);
     }
@@ -97,15 +99,22 @@ const EditBookForm = ({ selectedBook, closeEditBookModal }) => {
           }
           size={100}
         />
-        <ImgCrop>
-          <Upload {...props} className="upload-input">
-            <Button className="btnMainOut">Change Photo</Button>
-          </Upload>
-        </ImgCrop>
+        <Upload {...props} className="upload-input">
+          <Button className="btnMainOut">Change Photo</Button>
+        </Upload>
       </span>
       <div className="form-element-full">
         <label>Book name</label>
         <Input value={bookName} onChange={(e) => setBookName(e.target.value)} />
+      </div>
+      <div className="form-element-full">
+        <label>Book description</label>
+        <textarea
+          type="text"
+          className="ant-input"
+          value={description}
+          onChange={(e) => setDesscription(e.target.value)}
+        />
       </div>
       <div className="form-element-full">
         <label>Authors</label>
@@ -131,8 +140,11 @@ const EditBookForm = ({ selectedBook, closeEditBookModal }) => {
           {renderCategories()}
         </Select>
       </div>
-      <button onClick={editBookHandler} className="btn btnMain">
-        ADD BOOK
+      <button
+        onClick={editBookHandler}
+        className="ant-btn btnMain ant-btn-round"
+      >
+        EDIT BOOK
       </button>
     </div>
   );

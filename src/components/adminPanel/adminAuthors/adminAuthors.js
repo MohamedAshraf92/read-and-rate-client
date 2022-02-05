@@ -8,13 +8,13 @@ import message from "antd/lib/message";
 import Input from "antd/lib/input";
 import Space from "antd/lib/space";
 import Popconfirm from "antd/lib/popconfirm";
-import API from "../../API";
-import { getAuthors } from "../../store/actions/authorsAction";
+import API from "../../../API";
+import { getAuthors } from "../../../store/actions/authorsAction";
 import Avatar from "antd/lib/avatar";
 import ImgCrop from "antd-img-crop";
 import Upload from "antd/lib/upload";
 
-import userIcon from "../../assets/user.png";
+import userIcon from "../../../assets/user.png";
 
 import "./adminAuthors.css";
 

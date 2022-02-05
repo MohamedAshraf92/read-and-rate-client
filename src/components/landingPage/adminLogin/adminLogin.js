@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Input from "antd/lib/input";
 import Button from "antd/lib/button";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import logo from "../../assets/logo.png";
-import API from "../../API";
+import logo from "../../../assets/logo.png";
+import API from "../../../API";
 import LoginFooter from "../loginFooter/loginFooter";
-import { loginUser } from "../../store/actions/authActions";
+import { loginUser } from "../../../store/actions/authActions";
 
 import "./adminLogin.css";
 

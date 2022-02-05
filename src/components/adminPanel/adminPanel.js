@@ -1,9 +1,9 @@
 import React from "react";
 import Tabs from "antd/lib/tabs";
-import MainNavbar from "../../components/mainNavbar/mainNavbar";
-import AdminCategories from "../../components/adminCategories/adminCategories";
-import AdminAuthors from "../../components/adminAuthors/adminAuthors";
-import AdminBooks from "../../components/adminBooks/adminBooks";
+import MainNavbar from "../landingPage/mainNavbar/mainNavbar";
+import AdminCategories from "./adminCategories/adminCategories";
+import AdminBooks from "./adminBooks/adminBooks";
+import AdminAuthors from "./adminAuthors/adminAuthors";
 
 import "./adminPanel.css";
 

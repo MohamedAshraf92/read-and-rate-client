@@ -1,7 +1,7 @@
 import React from "react";
-import LoginHeader from "../../components/loginHeader/loginHeader";
-import SignupForm from "../../components/signupForm/signupForm";
-import LoginFooter from "../../components/loginFooter/loginFooter";
+import LoginHeader from "./loginHeader/loginHeader";
+import SignupForm from "./signupForm/signupForm";
+import LoginFooter from "./loginFooter/loginFooter";
 
 import "./landingPage.css";
 

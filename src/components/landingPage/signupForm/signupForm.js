@@ -27,34 +27,36 @@ const SignupForm = () => {
         placeholder="First Name"
         {...register("firstName", { required: true })}
       />
-      {errors.firstName && <p>First name is required</p>}
+      {errors.firstName && <p className="form-err">First name is required</p>}
       <Input
         className="signup-input"
         placeholder="Last Name"
         {...register("lastName", { required: true })}
       />
-      {errors.lastName && <p>Last name is required</p>}
+      {errors.lastName && <p className="form-err">Last name is required</p>}
       <Input
         className="signup-input"
         type="email"
         placeholder="Email Address"
         {...register("email", { required: true })}
       />
-      {errors.email && <p>Email is required</p>}
+      {errors.email && <p className="form-err">Email is required</p>}
       <Input
         className="signup-input"
         type="password"
         placeholder="Password"
         {...register("password", { required: true })}
       />
-      {errors.password && <p>Password is required</p>}
+      {errors.password && <p className="form-err">Password is required</p>}
       <Input
         className="signup-input"
         type="password"
         placeholder="Retype password"
         {...register("rePassword", { required: true })}
       />
-      {errors.rePassword && <p>Please, Retype your password</p>}
+      {errors.rePassword && (
+        <p className="form-err">Please, Retype your password</p>
+      )}
       <ImgCrop>
         <Upload className="signup-upload">
           <Button className="btnMainOut" icon={<UploadOutlined />}>
@@ -62,7 +64,7 @@ const SignupForm = () => {
           </Button>
         </Upload>
       </ImgCrop>
-      <Button className="btnMain signup-btn">Signup Now</Button>
+      <button className="ant-btn btnMain signup-btn">Signup Now</button>
     </form>
   );
 };

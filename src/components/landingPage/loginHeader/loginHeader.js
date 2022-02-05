@@ -2,7 +2,7 @@ import React from "react";
 import Input from "antd/lib/input";
 import Button from "antd/lib/button";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import logo from "../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 
 import "./loginHeader.css";
 

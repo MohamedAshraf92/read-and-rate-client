@@ -7,8 +7,8 @@ import { MdAddCircle } from "react-icons/md";
 import message from "antd/lib/message";
 import Input from "antd/lib/input";
 import Popconfirm from "antd/lib/popconfirm";
-import API from "../../API";
-import { getCategories } from "../../store/actions/categoriesActions";
+import API from "../../../API";
+import { getCategories } from "../../../store/actions/categoriesActions";
 
 import "./adminCategories.css";
 

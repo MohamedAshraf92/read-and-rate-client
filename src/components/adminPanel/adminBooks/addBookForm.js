@@ -5,7 +5,7 @@ import Input from "antd/lib/input";
 import Select from "antd/lib/select";
 import Upload from "antd/lib/upload";
 import Button from "antd/lib/button";
-import { addBook } from "../../store/actions/booksActions";
+import { addBook } from "../../../store/actions/booksActions";
 
 const AddBookForm = ({ closeAddBookModal }) => {
   const {

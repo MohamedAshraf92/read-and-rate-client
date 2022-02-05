@@ -6,9 +6,9 @@ import Modal from "antd/lib/modal";
 import { MdAddCircle } from "react-icons/md";
 import message from "antd/lib/message";
 import Popconfirm from "antd/lib/popconfirm";
-import { getAuthors } from "../../store/actions/authorsAction";
-import { getCategories } from "../../store/actions/categoriesActions";
-import { getBooks, deleteBook } from "../../store/actions/booksActions";
+import { getAuthors } from "../../../store/actions/authorsAction";
+import { getCategories } from "../../../store/actions/categoriesActions";
+import { getBooks, deleteBook } from "../../../store/actions/booksActions";
 import Avatar from "antd/lib/avatar";
 
 import AddBookForm from "./addBookForm";

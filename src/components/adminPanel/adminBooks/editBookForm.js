@@ -5,9 +5,9 @@ import Select from "antd/lib/select";
 import Upload from "antd/lib/upload";
 import Button from "antd/lib/button";
 import Avatar from "antd/lib/avatar";
-import { editBook } from "../../store/actions/booksActions";
+import { editBook } from "../../../../store/actions/booksActions";
 
-import bookIcon from "../../assets/book.png";
+import bookIcon from "../../../assets/book.png";
 
 const EditBookForm = ({ selectedBook, closeEditBookModal }) => {
   const [bookName, setBookName] = useState("");
